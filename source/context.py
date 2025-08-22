@@ -16,11 +16,16 @@ class SafeFormatDict(dict):
     def __missing__(self, key): 
         return key.join("{}")
 
-# Set locale to the user's locale
-if configuration.conf.email_template.language == "fr":
-    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-else:
-    locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
+# Set locale to the user's locale with safe fallbacks
+desired = 'fr_FR.UTF-8' if configuration.conf.email_template.language == 'fr' else 'en_US.UTF-8'
+_applied = None
+for loc in (desired, 'C.UTF-8', 'C'):
+    try:
+        locale.setlocale(locale.LC_TIME, loc)
+        _applied = loc
+        break
+    except locale.Error:
+        continue
 
 placeholders = SafeFormatDict({
     "date": dt.datetime.now().strftime("%Y-%m-%d"),

@@ -1,0 +1,18 @@
+# .dockerignore works similar to .gitignore
+.git
+.gitignore
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.build/
+build/
+dist/
+.eggs/
+*.egg-info/
+node_modules/
+.DS_Store
+.vscode/
+.github/
+config/config.yml
+config/LAST_NEWSLETTER.txt
