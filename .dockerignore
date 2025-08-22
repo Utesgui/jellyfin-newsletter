@@ -1,18 +1,22 @@
-# .dockerignore works similar to .gitignore
+# Version control
 .git
 .gitignore
+
+# Python cache files
 **/__pycache__/
 **/*.pyc
 **/*.pyo
 **/*.pyd
-.build/
-build/
-dist/
-.eggs/
-*.egg-info/
-node_modules/
-.DS_Store
+
+# Editor/OS artifacts
 .vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment files and runtime state (security relevant)
+.env
+.env.*
+
+# CI/metadata
 .github/
-config/config.yml
-config/LAST_NEWSLETTER.txt
